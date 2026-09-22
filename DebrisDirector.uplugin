@@ -1,0 +1,27 @@
+{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "1.0.0",
+	"EngineVersion": "5.8.0",
+	"FriendlyName": "DebrisDirector - Impact Debris On A Budget",
+	"Description": "One pooled service for everything an action scene leaves behind - shards, shells, impact decals, knocked-off parts. The game only reports \"something hit here\"; DebrisDirector decides how much of it becomes a piece, what disappears first when there is too much, and when the physics stops costing anything. This is not another object pool. Four rules are the product. A hard per-frame spawn budget (default 24): requests above it are not thrown away, they are merged - five hits on the same surface become one larger piece instead of five small ones, which is why a grenade does not cost more frame time than a single shot. Eviction by importance and distance: at the population ceiling (default 400) the piece that dies is not the oldest one, it is the least important far-away one, and a piece inside the player's view outlives one behind their back. Physics with an expiry date: every piece simulates for at most MaxSimSeconds (default 3) and is then frozen with SetSimulatePhysics(false), because a hundred sleeping bodies are cheap and a hundred almost-sleeping ones are not. And fade instead of vanish: an evicted piece leaves over a short material parameter, so nothing blinks out in front of the player. DebrisDirector does not break anything apart - it produces no fragments from geometry (that is Chaos) and it does not replace particles (that is Niagara, which has no collision and leaves no remains). It manages the count, the lifetime and the cost of the pieces you bring. Every number it claims is drawn on a UCanvas counter box that survives a Shipping build: spawned this frame against the budget, merged away, population against the ceiling, simulating against sleeping bodies, evictions per second. Console commands Debris.Show, Debris.Budget, Debris.Cap, Debris.Clear, Debris.Stress and Debris.Stats. The merge and eviction rules are static Blueprint library functions, so they can be tested without a world - and they are, by the automation tests that ship with the plugin. One runtime module, no UMG, no Niagara, no Chaos and no editor module. Built and verified on Win64.",
+	"Category": "Game Mechanics",
+	"CreatedBy": "Silvan Teufel",
+	"CreatedByURL": "https://silvan.teufel-engineering.com",
+	"DocsURL": "https://wiki.teufel-engineering.com/en/DebrisDirector/documentation",
+	"SupportURL": "mailto:teufelsilvan@gmail.com",
+	"CanContainContent": true,
+	"IsBetaVersion": false,
+	"IsExperimentalVersion": false,
+	"Installed": false,
+	"Modules": [
+		{
+			"Name": "DebrisDirector",
+			"Type": "Runtime",
+			"LoadingPhase": "PreDefault",
+			"PlatformAllowList": [
+				"Win64"
+			]
+		}
+	]
+}
